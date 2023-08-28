@@ -36,87 +36,87 @@
 //     }
 // }
 
-pipeline {
-    agent any
+// pipeline {
+//     agent any
     
-    stages {
-        stage('Git Checkout') {
-            steps {
-                script{
-                    try{
-                         echo 'Cloning the Repo'
-                         git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
+//     stages {
+//         stage('Git Checkout') {
+//             steps {
+//                 script{
+//                     try{
+//                          echo 'Cloning the Repo'
+//                          git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
 
-                         if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")){
-                             echo "This Build was successfull and this is from try block "
-                            }
-                // Your build steps here
-                        }
-                    catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw e
-                    }
-                    }
-                }
-            }
-        }
+//                          if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")){
+//                              echo "This Build was successfull and this is from try block "
+//                             }
+//                 // Your build steps here
+//                         }
+//                     catch (Exception e) {
+//                         currentBuild.result = 'FAILURE'
+//                         throw e
+//                     }
+//                     }
+//                 }
+//             }
+//         }
         
-        stage('Build') {
-            steps {
-                echo 'Bulding'
-                bat 'Build.bat'
-                // Your test steps here
-            }
-        }
+//         stage('Build') {
+//             steps {
+//                 echo 'Bulding'
+//                 bat 'Build.bat'
+//                 // Your test steps here
+//             }
+//         }
         
-        stage('Testing') {
-            steps {
-                echo 'Testing...'
-                bat 'Unit.bat'
-                // Your deployment steps here
-            }
-        }
-        stage('QA'){
-            steps{
-                echo "Quality Analysis"
-                bat 'Quality.bat'
-            }
-        }
-        stage ("Deploy"){
-            steps{
-                echo "Deploying"
-                bat 'Deploy.bat'
-            }
-        }
-    }
+//         stage('Testing') {
+//             steps {
+//                 echo 'Testing...'
+//                 bat 'Unit.bat'
+//                 // Your deployment steps here
+//             }
+//         }
+//         stage('QA'){
+//             steps{
+//                 echo "Quality Analysis"
+//                 bat 'Quality.bat'
+//             }
+//         }
+//         stage ("Deploy"){
+//             steps{
+//                 echo "Deploying"
+//                 bat 'Deploy.bat'
+//             }
+//         }
+//     }
     
-    post {
-        always {
-            echo 'This will run always'
-            // Clean up or final actions here
-        }
+//     post {
+//         always {
+//             echo 'This will run always'
+//             // Clean up or final actions here
+//         }
         
-        success {
-            echo 'This will run on successful build'
-            // Notify or perform actions on success
-        }
+//         success {
+//             echo 'This will run on successful build'
+//             // Notify or perform actions on success
+//         }
         
-        failure {
-            echo 'This will run on build failure'
-            // Perform actions on build failure
-        }
+//         failure {
+//             echo 'This will run on build failure'
+//             // Perform actions on build failure
+//         }
         
-        unstable {
-            echo 'This will run on unstable build'
-            // Perform actions on unstable build
-        }
+//         unstable {
+//             echo 'This will run on unstable build'
+//             // Perform actions on unstable build
+//         }
         
-        changed {
-            echo 'This will run when there are changes'
-            // Perform actions when changes occur
-        }
-    }
-}
+//         changed {
+//             echo 'This will run when there are changes'
+//             // Perform actions when changes occur
+//         }
+//     }
+// }
 // pipeline {
 //     agent any
     
@@ -159,3 +159,84 @@ pipeline {
 //         }
 //     }
 // }
+pipeline {
+    agent any
+    
+    stages {
+        stage('Git Checkout') {
+            steps {
+                script {
+                    try {
+                        echo 'Cloning the Repo'
+                        git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
+
+                        if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")) {
+                            echo "This Build was successful and this is from try block"
+                        }
+                        // Your build steps here
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
+                }
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                echo 'Building'
+                bat 'Build.bat'
+                // Your test steps here
+            }
+        }
+        
+        stage('Testing') {
+            steps {
+                echo 'Testing...'
+                bat 'Unit.bat'
+                // Your deployment steps here
+            }
+        }
+        
+        stage('QA'){
+            steps {
+                echo "Quality Analysis"
+                bat 'Quality.bat'
+            }
+        }
+        
+        stage("Deploy") {
+            steps {
+                echo "Deploying"
+                bat 'Deploy.bat'
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'This will run always'
+            // Clean up or final actions here
+        }
+        
+        success {
+            echo 'This will run on successful build'
+            // Notify or perform actions on success
+        }
+        
+        failure {
+            echo 'This will run on build failure'
+            // Perform actions on build failure
+        }
+        
+        unstable {
+            echo 'This will run on unstable build'
+            // Perform actions on unstable build
+        }
+        
+        changed {
+            echo 'This will run when there are changes'
+            // Perform actions when changes occur
+        }
+    }
+}
