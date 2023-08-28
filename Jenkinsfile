@@ -117,6 +117,7 @@
 //         }
 //     }
 // }
+// Jenkins file for the pipeline to get the code form git repo,  build it, test it using maven and upon successfull testing will ge pushed to the AWS CodeCommit which will triggger the main pipeline 
 // pipeline {
 //     agent any
     
