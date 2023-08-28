@@ -162,6 +162,10 @@
 // }
 pipeline {
     agent any
+    parameters{
+        choice(name:'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'These are the Versions')
+        booleanParam(name:'executeTest',defaultValue: true , description:'This variable decides whether the test should run or not ')
+    }
     
     stages {
         stage('Git Checkout') {
@@ -192,6 +196,11 @@ pipeline {
         }
         
         stage('Testing') {
+            when{
+                expression{
+                    params.executeTest
+                }
+            }
             steps {
                 echo 'Testing...'
                 bat 'Unit.bat'
