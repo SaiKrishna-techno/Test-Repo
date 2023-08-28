@@ -44,18 +44,19 @@ pipeline {
             steps {
                 script{
                     try{
-                echo 'Cloning the Repo'
-                git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
+                         echo 'Cloning the Repo'
+                         git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
 
-                 if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")){
-                    echo "This Build was successfull and this is from try block "
-                 }
+                         if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")){
+                             echo "This Build was successfull and this is from try block "
+                            }
                 // Your build steps here
-                    }catch (Exception e) {
+                        }
+                    catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         throw e
                     }
-                }
+                    }
                 }
             }
         }
@@ -115,9 +116,7 @@ pipeline {
             // Perform actions when changes occur
         }
     }
-
-
-
+}
 // pipeline {
 //     agent any
     
