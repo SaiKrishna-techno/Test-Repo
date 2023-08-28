@@ -42,9 +42,21 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
+                script{
+                    try{
                 echo 'Cloning the Repo'
                 git branch: 'main', url: 'https://github.com/SaiKrishna-techno/Test-Repo.git'
+
+                 if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")){
+                    echo "This Build was successfull and this is from try block "
+                 }
                 // Your build steps here
+                    }catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
+                }
+                }
             }
         }
         
@@ -104,3 +116,48 @@ pipeline {
         }
     }
 }
+
+
+
+// pipeline {
+//     agent any
+    
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout scm
+//             }
+//         }
+        
+//         stage('Build and Test') {
+//             steps {
+//                 script {
+//                     try {
+//                         // Build with Maven
+//                         sh 'mvn clean install'
+                        
+//                         // Run Selenium tests
+//                         sh 'mvn test'
+                        
+//                         // If tests pass, commit to AWS CodeCommit
+//                         if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")) {
+//                             sh '''
+//                                 git config --global user.email "jenkins@example.com"
+//                                 git config --global user.name "Jenkins"
+//                                 git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/my-repo
+//                                 cd my-repo
+//                                 cp -r ../workspace/* .
+//                                 git add .
+//                                 git commit -m "Automated commit from Jenkins"
+//                                 git push origin master
+//                             '''
+//                         }
+//                     } catch (Exception e) {
+//                         currentBuild.result = 'FAILURE'
+//                         throw e
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
