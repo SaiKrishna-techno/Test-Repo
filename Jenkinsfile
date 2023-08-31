@@ -161,7 +161,11 @@
 //     }
 // }
 pipeline {
-    agent any
+    agent {
+        docker{
+            image 'jenkins/jenkins:latest'
+        }
+    }
     parameters{
         choice(name:'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'These are the Versions')
         booleanParam(name:'executeTest',defaultValue: true , description:'This variable decides whether the test should run or not ')
@@ -178,7 +182,6 @@ pipeline {
                         if (currentBuild.resultIsBetterOrEqualTo("SUCCESS")) {
                             echo "This Build was successful and this is from try block"
                         }
-                        // Your build steps here
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         throw e
@@ -191,7 +194,6 @@ pipeline {
             steps {
                 echo 'Building'
                 bat 'Build.bat'
-                // Your test steps here
             }
         }
         
@@ -204,7 +206,6 @@ pipeline {
             steps {
                 echo 'Testing...'
                 bat 'Unit.bat'
-                // Your deployment steps here
             }
         }
         
