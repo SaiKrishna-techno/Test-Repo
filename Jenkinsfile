@@ -163,7 +163,7 @@
 pipeline {
      agent {
          docker{
-             image "jenkins/jenkins:latest"
+             image "jenkins/jenkins"
          }
      }
     parameters{
