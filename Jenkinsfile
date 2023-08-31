@@ -161,11 +161,11 @@
 //     }
 // }
 pipeline {
-    // agent {
-    //     docker{
-    //         image 'jenkins/jenkins:latest'
-    //     }
-    // }
+     agent {
+         docker{
+             image "jenkins/jenkins:latest"
+         }
+     }
     agent any 
     parameters{
         choice(name:'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'These are the Versions')
