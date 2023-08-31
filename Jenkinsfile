@@ -173,6 +173,9 @@ pipeline {
     
     stages {
         stage('Git Checkout') {
+            environment {
+                  HOME="."
+                }
             steps {
                 script {
                     try {
