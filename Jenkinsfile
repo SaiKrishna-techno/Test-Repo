@@ -163,7 +163,7 @@
 pipeline {
      agent {
          docker{
-             image '90ac57cd65fa:latest'
+             image 'jenkins\jenkins:latest'
          }
      }
     // agent any
