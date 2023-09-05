@@ -162,9 +162,7 @@
 // }
 pipeline {
      agent {
-         docker{
-             image "90ac57cd65fa"
-         }
+         docker { image '90ac57cd65fa', label 'docker' }
      }
     // agent any
     parameters{
