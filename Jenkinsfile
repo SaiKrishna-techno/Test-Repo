@@ -163,7 +163,7 @@
 pipeline {
      agent {
          docker{
-             image "90ac57cd65fa"
+             image '90ac57cd65fa2ffab54ac035dd34198fdd8d0d20a9947b320ba9f686e26f0461:latest'
          }
      }
     // agent any
