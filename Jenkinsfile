@@ -162,8 +162,9 @@
 // }
 pipeline {
      agent {
-         docker { image '90ac57cd65fa', label 'docker' }
-     }
+    docker { image '90ac57cd65fa', label "docker" }
+}
+
     // agent any
     parameters{
         choice(name:'VERSION', choices:['1.1.0','1.2.0','1.3.0'], description:'These are the Versions')
