@@ -163,7 +163,7 @@
 pipeline {
      agent {
          docker{
-             image 'jenkins/jenkins:latest'
+             image 'myjenkins-blueocean:2.332.3-1'
          }
      }
     // agent any
